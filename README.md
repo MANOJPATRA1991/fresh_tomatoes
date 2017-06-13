@@ -7,8 +7,8 @@ The user can view movie trailers and look for additional information on the webs
 1. [Installation](#installation)
 2. [Screenshots](#screenshots) 
 3. [Description](#description)
-5. [License](#license)
-6. [Reference](#reference)
+5. [Reference](#reference)
+6. [License](#license)
 
 ### Installation
 The source code for this project is written in [Python](https://www.python.org/downloads/) programming language. It works well in both version 3.6.1 as well as 2.7.13.
@@ -132,7 +132,7 @@ interstellar = media.Movie(
 
 ### Reference
 1. [Python Documentation](https://docs.python.org/3/)
-2. [Google Python Style Guide](#https://google.github.io/styleguide/pyguide.html)
+2. [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
 3. [PEP8](https://www.python.org/dev/peps/pep-0008/)
 
 ### License
