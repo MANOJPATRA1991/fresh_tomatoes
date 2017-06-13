@@ -1,12 +1,15 @@
-"""This module defines a Movies class that can be used to create instances of type Movies"""
+"""This module defines a Movies class that can be
+used to create instances of type Movies"""
 import webbrowser
+
 
 class Movie(object):
     """This class provides a way to store movie related information"""
-    
+
     VALID_RATINGS = ["G", "PG", "PG-13", "R"]
-    MOVIE_GENRE = ["Science Fiction", "Crime", "Thriller", "Fantasy", "Drama", "Action"]
-    
+    MOVIE_GENRE = ["Science Fiction", "Crime", "Thriller",
+                   "Fantasy", "Drama", "Action"]
+
     def __init__(self, movie_title, movie_storyline, movie_genre, poster_image,
                  trailer_youtube, mpaa_rating, imdb, rotten_tomatoes,
                  cast, director, reviews, reviewers):
@@ -40,5 +43,6 @@ class Movie(object):
         self.reviewers = reviewers
 
     def show_trailer(self):
-        """This function opens a web browser to play the trailer for a Movie class instance"""
+        """This function opens a web browser to play
+        the trailer for a Movie class instance"""
         webbrowser.open(self.trailer_youtube_url)
