@@ -1,4 +1,5 @@
-"""This module defines functions to write data related to movies to fresh_tomatoes.html file."""
+"""This module defines functions to write data related
+to movies to fresh_tomatoes.html file."""
 import webbrowser
 import os
 import re
@@ -279,7 +280,7 @@ MOVIE_TILE_CONTENT = """
 
 def create_movie_tiles_content(movies):
     """
-    This function creates movie tiles containing movie details 
+    This function creates movie tiles containing movie details
     for each item in the movies list
 
     Args:
@@ -292,20 +293,20 @@ def create_movie_tiles_content(movies):
     content = ''
     for movie in movies:
         # Extract the youtube ID from the url
-        
-        #extract the part following v=
+
+        # extract the part following v=
         youtube_id_match = re.search(
             r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
 
-        #extract the part following be/
+        # extract the part following be/
         youtube_id_match = youtube_id_match or re.search(
             r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
 
-        #youtube_id_match.group(0) returns the string extracted
-        #based on regex from movie.trailer_youtube_url
+        # youtube_id_match.group(0) returns the string extracted
+        # based on regex from movie.trailer_youtube_url
         trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
                               else None)
-        
+
         # Append the tile for the movie with its content filled in
         content += MOVIE_TILE_CONTENT.format(
             movie_title=movie.title,
@@ -326,15 +327,15 @@ def create_movie_tiles_content(movies):
 
 def open_movies_page(movies):
     """
-    This function takes a movies list object as an argument and 
+    This function takes a movies list object as an argument and
     writes it at respective DOM location inside the fresh_tomatoes.html file.
 
     Args:
         movies: A list object containing instances of class Movies
     """
     # Create or overwrite the output file
-    #Open file and return a corresponding file object
-    output_file = open('fresh_tomatoes.html', 'w')      
+    # Open file and return a corresponding file object
+    output_file = open('fresh_tomatoes.html', 'w')
 
     # Replace the movie tiles placeholder with generated content
     rendered_content = MAIN_PAGE_CONTENT.format(
@@ -342,12 +343,12 @@ def open_movies_page(movies):
 
     # Output the file
     output_file.write(MAIN_PAGE_HEAD + rendered_content)
-    
-    #close the file
+
+    # close the file
     output_file.close()
 
     # open the output file in the browser (in a new tab, if possible)
     url = os.path.abspath(output_file.name)
-    
-    #open in new tab if possible
+
+    # open in new tab if possible
     webbrowser.open('file://' + url, new=2)
