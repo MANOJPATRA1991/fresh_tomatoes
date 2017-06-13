@@ -10,10 +10,10 @@ The user can view movie trailers and look for additional information on the webs
 5. [License](#license)
 
 ### Installation
-The source code for this project is written in [Python 3.6.1](https://www.python.org/downloads/) programming language. 
-For direct download of version 3.6.1 [click here](https://www.python.org/ftp/python/3.6.1/python-3.6.1.exe).
+The source code for this project is written in [Python](https://www.python.org/downloads/) programming language. 
+For direct download of version 3.6.1 [click here](https://www.python.org/ftp/python/3.6.1/python-3.6.1.exe) and for version 2.7.13 [click here](https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi).
 
-The source code was checked against bugs and quality using **Pylint** checker.
+The source code was checked against bugs and quality using **Pylint** checker and [PEP8 online check](http://pep8online.com).
 To install Pylint:
 ```
 pip install pylint
