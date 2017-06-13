@@ -38,9 +38,11 @@ Inside the **fresh_tomatoes** directory, we have a **movies** folder which conta
 
 **entertainment_center.py** is the file where we create Movie instances and that when executed runs the program and opens the website on a web browser.
 
-To run the program, open **entertainment_center.py** with **IDLE(Python 3.6)** and then **Run -> Run Module** or press **F5** for instant execution.
+##### Executing the program
 
-#### The Movie Class
+To run the program, clone or download the repository to your desktop. Then open **entertainment_center.py** with **Python IDLE** and then **Run -> Run Module** or press **F5** for instant execution.
+
+##### The Movie Class
 ```
 class Movie(object):
     """This class provides a way to store movie related information"""
@@ -86,7 +88,7 @@ class Movie(object):
         the trailer for a Movie class instance"""
         webbrowser.open(self.trailer_youtube_url)
 ```
-### Creating an instance of the Movie class:
+##### Creating an instance of the Movie class:
 ```
 # INTERSTELLAR
 interstellar = media.Movie(
