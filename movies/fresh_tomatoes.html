@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fresh Tomatoes!</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+            background: url(https://images2.alphacoders.com/141/141340.jpg) top right no-repeat;
+            background-attachment:fixed;
+            background-position: center;
+            background-size: cover;
+            background-color: #585858;
+        }
+        
+        blockquote{
+            font-size: 1.5em;
+        }
+
+        span{
+            color: green;
+            padding-right: 10px;
+            text-align: justify;
+        }
+
+        .rate{
+            padding-right: 50px;
+            display: inline-block;
+        }
+
+        .rate h3{
+            text-align: center;
+        }
+
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 1280px;
+            height: 720px;
+        }
+
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+
+        #movie-rev{
+            height: 150px;
+            overflow-y: auto;
+        }
+        
+        /*modified scrollbar for use in div with id movie-rev*/
+        #movie-rev::-webkit-scrollbar {
+            width: 1em;
+        }
+ 
+        #movie-rev::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+ 
+        #movie-rev::-webkit-scrollbar-thumb {
+          background-color: darkgrey;
+          outline: 1px solid slategrey;
+        }
+
+        #movie-detail p{
+            color: red;
+        }
+
+        .movie-tile {
+            position:relative;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            transition: transform 1s;
+        }
+        
+        .movie-tile:hover {
+            cursor: pointer;
+            transform: scale(1.2)
+        }
+
+        .caption{
+            position: absolute;
+            height: 342px;
+            width: 220px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 0;
+            background:#000;
+            background: -webkit-linear-gradient(bottom, #000 40%, rgba(0, 0, 0, 0) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+            background: -moz-linear-gradient(bottom, #000 40%, rgba(0, 0, 0, 0) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+            background: -o-linear-gradient(bottom, #000 40%, rgba(0, 0, 0, 0) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+            background: linear-gradient(to top, #000 40%, rgba(0, 0, 0, 0) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+            text-align: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .2s, visibility .2s;
+        }
+
+        .thumbnail{
+            position: relative;
+            width: 220px;
+            height: 342px;
+            border-radius: 0;
+            border: 0 none;
+            box-shadow: none;
+        }
+
+        .thumbnail > img{
+            height: 100%;
+            width:100%;
+        }
+
+        .movie-tile .caption h2,p{
+            color: #fff;
+            padding-top: 10px;
+        }
+
+        .movie-tile:hover .caption{
+            visibility: visible;
+            opacity:0.9;
+        }
+
+        .scale-media {
+            padding-bottom: 65.25%;
+            position: relative;
+        }
+
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 15px;
+            top: 0;
+            background-color: white;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+            $("#movie-detail").empty();
+            $("#movie-reviews").empty();
+        });
+        
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var genre = $(this).attr('data-genre');
+            var rev = eval($(this).data('reviews'));
+            var revr = eval($(this).data('reviewers'));
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id');
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            var rating=$(this).attr('data-rating');
+            var imdb = $(this).attr('data-imdb');
+            var rt = $(this).attr('data-rt');
+            var cast = eval($(this).data('cast'));
+            var director = $(this).attr('data-director');
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'allowfullscreen': "",
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+            $("#movie-detail").empty().append($('<h3><img src="https://blog.majestic.com/wp-content/uploads/2010/10/Video-Icon-crop-300x225.png" width="60" height="40">  ' + rating + '</h3>' +
+                                                '<div class="rate"><h3> ' + imdb + '</h3><p>IMDB </p></div>' +
+                                                '<div class="rate"><h3> ' + rt + '</h3><p>Rotten Tomatoes </p></div><hr/>' +
+                                                '<div class="rate"><h2>Genre </h2><p><span>' + genre + '</span></p></div><hr/>' +
+                                                '<div><h2>Cast </h2><p> '));
+            $.each(cast, function(i, val){
+                $("#movie-detail").append($('<span>' + val + ' |</span>'));
+            });
+            $("#movie-detail").append($('</p></div><hr/><div class="rate"><h2>Director </h2><p><span> ' + director + '</span></p></div>'));
+            $("#movie-reviews").empty().append($('<hr/><h2> Reviews </h2><div id="movie-rev">'));
+            $.each(revr, function(i, val){
+                $("#movie-rev").append($('<blockquote><h4>' + rev[i] + '</h4><footer><cite><em>' + val + '</em></cite></footer></blockquote>'));
+            });
+            $("#movie-rev").append($('</div></div>'));
+        });
+        
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="row">
+                <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+                    <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+                </a>
+                <div class="row col-xs-9">
+                    <!--youtube media player-->
+                    <div class="row col-xs-12">
+                        <div class="scale-media" id="trailer-video-container">
+                        </div>
+                    </div>
+                </div>
+                <!--to display additional info for a movie-->
+                <div class="col-xs-3" id="movie-detail">
+                </div>
+                <!--contains reviews for a movie-->
+                <div class="col-xs-12">
+                    <div class="col-xs-12" id="movie-reviews">
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="ePbKGoIGAXY" data-rating="PG-13"
+ data-imdb="8.6" data-rt="71%" data-cast="['Matthew McConaughey', 'Anna Hathaway', 'Jessica Chastain', 'Matt Damon']" data-director="Christopher Nolan" data-genre="Science Fiction  |  Drama"
+ data-reviews="['In 2001, Kubrick saw a future that was out of our hands. For Nolan, our reliance on one another is all we have got.', 'Brainy, barmy and beautiful to behold, this is Stephen Hawkings Star Trek: a mind-bending opera of space and                              time with a soul wrapped up in all the science.', 'As visually and conceptually audacious as anything Nolan has yet done, the directors ninth feature also proves                              more emotionally accessible than his coolly cerebral thrillers and Batman movies.']" data-reviewers="['Peter Travers, Rolling Stone', 'James Dyer, Empire', 'Scott Foundas, Variety']" data-toggle="modal" data-controls-modal="modal" data-target="#trailer" data-backdrop="static" data-keyboard="false">
+    <div class="thumbnail">
+        <img src="http://static.tvtropes.org/pmwiki/pub/images/interstellar_film_poster_1146.jpg" width="220" height="342">
+    
+        <div class="caption"><h2>Interstellar</h2><p><br>In the future, Earth is slowly becoming uninhabitable. Ex-NASA pilot Cooper, along with a team of researchers,                             is sent on a planet exploration mission to report which planet can sustain life.</p></div>
+    </div>    
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="5PSNL1qE6VY" data-rating="PG-13"
+ data-imdb="7.8" data-rt="83%" data-cast="['Zoe Saldana', 'Sam Worthington', 'Sigourney Weaver', 'Stephen King', 'Michelle Rodriguez']" data-director="James Cameron" data-genre="Science Fiction  |  Fantasy  |  Drama  |  Action"
+ data-reviews="['Worth watching for fans, completists and anyone who missed it on the big screen first time around -                        but it wont win over any haters.', 'What if the director of the highest-grossing movie ever made (Titanic) spent a rumored $500 million                        on a spectacular futuristic sci-fi epic and no one other than hardcore fanboys went to see it?', 'Fifteen years in the making, James Camerons latest creation is an eye-popping spectacle of conflict                        between idyllic aliens and greedy humans saturated with environmental and spiritual themes.']" data-reviewers="['Nick de Semlyen, Empire', 'Sandie Angulo Chen, Common Sense Media', 'Adam R. Holz, Plugged In']" data-toggle="modal" data-controls-modal="modal" data-target="#trailer" data-backdrop="static" data-keyboard="false">
+    <div class="thumbnail">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Avatar-Teaser-Poster.jpg/220px-Avatar-Teaser-Poster.jpg" width="220" height="342">
+    
+        <div class="caption"><h2>Avatar</h2><p><br>Jake, a paraplegic marine, replaces his brother on the Na'vi inhabited Pandora for a corporate mission.                       He is accepted by the natives as one of their own but he must decide where his loyalties lie.</p></div>
+    </div>    
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="eOrNdBpGMv8" data-rating="PG-13"
+ data-imdb="8.1" data-rt="92%" data-cast="['Robert Downey Jr.', 'Chris Evans', 'Scarlett Johansson', 'Chris Hemsworth', 'Mark Ruffalo', 'Nick Fury']" data-director="Joss Whedon" data-genre="Science Fiction  |  Fantasy  |  Drama  |  Action"
+ data-reviews="['If twos company and threes a crowd, whats four? Or six? In this case, its Marvels newest superhero movie.', 'Quick-witted and nuanced, this movie takes the best of the genre -- iconic heroes fighting for truth and                          justice -- and dishes it out in a fanboy-pleasing, edge-of-your seat way.', 'A joyous blend of heroism and humour that raises the stakes even as it maintains a firm grip on                          what makes the individual heroes tick.']" data-reviewers="['Paul Asay, Plugged In', 'S. Jhoanna Robledo, Common Sense Media', 'Empire']" data-toggle="modal" data-controls-modal="modal" data-target="#trailer" data-backdrop="static" data-keyboard="false">
+    <div class="thumbnail">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/TheAvengers2012Poster.jpg/220px-TheAvengers2012Poster.jpg" width="220" height="342">
+    
+        <div class="caption"><h2>The Avengers</h2><p><br>S.H.I.E.L.D. leader Nick Fury is compelled to launch the 'Avengers Initiative' when Loki poses a threat to planet Earth.                         Will Nick Fury's squad of superheroes prove themselves equal to the task?</p></div>
+    </div>    
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="MWRUNTLisPo" data-rating="PG-13"
+ data-imdb="7.6" data-rt="90%" data-cast="['Tilda Swinton', 'Benedict Cumberbatch', 'Chiwetel Ejiofor', 'Rachel McAdams', 'Mads Mikkelsen']" data-director="Scott Derrickson" data-genre="Science Fiction  |  Fantasy  |  Drama  |  Action"
+ data-reviews="['Marvels 14th Cinematic Universe movie has all the usual action and explosions, but it also has a                                different type of main character -- one whos magical and appealingly flawed but willing to change.', 'A bizarre and beautiful detour on the Marvel journey, which culminates in a mind-bending,                                expectation-inverting final act. Not to be watched under the influence.', 'Aesthetically, Doctor Strange is a good movie, one of the strongest in the Marvel canon thus far.                                But is it a good movie? A movie suitable for you or your family? That depends.']" data-reviewers="['Jeffrey M. Anderson, Common Sense Media', 'James Dyer, Empire', 'Paul Asay, Plugged In']" data-toggle="modal" data-controls-modal="modal" data-target="#trailer" data-backdrop="static" data-keyboard="false">
+    <div class="thumbnail">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c7/Doctor_Strange_poster.jpg/220px-Doctor_Strange_poster.jpg" width="220" height="342">
+    
+        <div class="caption"><h2>Doctor Strange</h2><p><br>While on a journey of physical and spiritual healing,                               a brilliant neurosurgeon is drawn into the world of the mystic arts.</p></div>
+    </div>    
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="EXeTwQWrcwY" data-rating="PG-13"
+ data-imdb="9.0" data-rt="94%" data-cast="['Christian Bale', 'Heath Ledger', 'Gary Oldman', 'Michael Caine', 'Morgan Freeman']" data-director="Christopher Nolan" data-genre="Crime  |  Thriller  |  Drama  |  Action"
+ data-reviews="['Heads up: a thunderbolt is about to rip into the blanket of bland we call summer movies.', 'Ledgers performance is monumental, but The Dark Knight lives up to it. Nolan cements his position                                 as Hollywoods premier purveyor of blockbuster smarts  and the Batbike is kinda cool, too.', 'This sequel to Batman Begins is mesmerizing and thought-provoking. But it shouldnt have been named                                 after the good guy. This is the Jokers court, and hes not looking for a laugh.']" data-reviewers="['Peter Travers, Rolling Stone', 'Mark Dinning, Empire', 'Paul Asay, Plugged In']" data-toggle="modal" data-controls-modal="modal" data-target="#trailer" data-backdrop="static" data-keyboard="false">
+    <div class="thumbnail">
+        <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Dark_Knight.jpg" width="220" height="342">
+    
+        <div class="caption"><h2>The Dark Knight</h2><p><br>The Joker, a psychopath, terrorises Gotham so he can prove that even the most incorruptible people                                can become evil. However, Batman, Gordon and Dent stand against him.</p></div>
+    </div>    
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="X8kYDQan8bw" data-rating="R"
+ data-imdb="7.9" data-rt="95%" data-cast="['Jake Gyllenhaal', 'Rene Russo', 'Riz Ahmed', 'Bill Paxton', 'Jonathan Coyne']" data-director="Dan Gilroy" data-genre="Crime  |  Thriller  |  Drama"
+ data-reviews="['Sharp, dark, satirical and bone-rattlingly thrilling, with a career-peak turn from Jake Gyllenhaal.                              Its this years Drive.', 'Nightcrawler curves and hisses its way into your head with demonic skill.', 'The result is a very good movie and a milestone in Gyllenhaals career but one in which the pieces                              dont quite fit together.']" data-reviewers="['Dan Jolin, Empire', 'Peter Travers, Rolling Stone', 'Christopher Orr, The Atlantic']" data-toggle="modal" data-controls-modal="modal" data-target="#trailer" data-backdrop="static" data-keyboard="false">
+    <div class="thumbnail">
+        <img src="https://resizing.flixster.com/V49PiBgbepPpFjn3J_b4ikNd6wA=/206x305/v1.bTsxMTE4OTQ3MztqOzE3NDA5OzEyMDA7ODAwOzEyMDA" width="220" height="342">
+    
+        <div class="caption"><h2>Nightcrawler</h2><p><br>Lou Bloom wants to set a score with his rival Joe Loder even as he tries to shoot sensational stories                             of the rich neighbourhood of the city. His quest gets a new direction after he meets Nina Romina.</p></div>
+    </div>    
+</div>
+
+    </div>
+  </body>
+</html>
