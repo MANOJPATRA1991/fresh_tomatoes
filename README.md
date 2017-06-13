@@ -40,6 +40,92 @@ Inside the **fresh_tomatoes** directory, we have a **movies** folder which conta
 
 To run the program, open **entertainment_center.py** with **IDLE(Python 3.6)** and then **Run -> Run Module** or press **F5** for instant execution.
 
+#### The Movie Class
+```
+class Movie(object):
+    """This class provides a way to store movie related information"""
+
+    VALID_RATINGS = ["G", "PG", "PG-13", "R"]
+    MOVIE_GENRE = ["Science Fiction", "Crime", "Thriller",
+                   "Fantasy", "Drama", "Action"]
+
+    def __init__(self, movie_title, movie_storyline, movie_genre, poster_image,
+                 trailer_youtube, mpaa_rating, imdb, rotten_tomatoes,
+                 cast, director, reviews, reviewers):
+        """
+        Initializes Movie class instance with following instance variables:
+
+            title
+            storyline
+            genre
+            poster_image_url
+            trailer_youtube_url
+            mpaa_rating
+            imdb
+            rotten_tomatoes
+            cast
+            director
+            reviews
+            reviewers
+        """
+        self.title = movie_title
+        self.storyline = movie_storyline
+        self.genre = movie_genre
+        self.poster_image_url = poster_image
+        self.trailer_youtube_url = trailer_youtube
+        self.mpaa_rating = mpaa_rating
+        self.imdb = imdb
+        self.rotten_tomatoes = rotten_tomatoes
+        self.cast = cast
+        self.director = director
+        self.reviews = reviews
+        self.reviewers = reviewers
+
+    def show_trailer(self):
+        """This function opens a web browser to play
+        the trailer for a Movie class instance"""
+        webbrowser.open(self.trailer_youtube_url)
+```
+### Creating an instance of the Movie class:
+```
+# INTERSTELLAR
+interstellar = media.Movie(
+    "Interstellar",
+    "In the future, Earth is slowly becoming uninhabitable. Ex"
+    "Ex-NASA pilot Cooper, along with a team of researchers, "
+    "is sent on a planet exploration mission to report which "
+    "planet can sustain life.",
+    media.Movie.MOVIE_GENRE[0] + "  |  " + media.Movie.MOVIE_GENRE[4],
+    "http://static.tvtropes.org/pmwiki/pub/images/" +
+    "interstellar_film_poster_1146.jpg",
+    "https://www.youtube.com/watch?v=ePbKGoIGAXY",
+    media.Movie.VALID_RATINGS[2],
+    8.6,
+    "71%",
+    [
+        "Matthew McConaughey",
+        "Anna Hathaway",
+        "Jessica Chastain",
+        "Matt Damon"],
+    "Christopher Nolan",
+    [
+        "In 2001, Kubrick saw a future that was out of our hands. "
+        "For Nolan, our reliance on one another is all we have got.",
+        "Brainy, barmy and beautiful to behold, this is Stephen "
+        "Hawkings Star Trek: a mind-bending opera of space and "
+        "time with a soul wrapped up in all the science.",
+        "As visually and conceptually audacious as anything Nolan "
+        "has yet done, the directors ninth feature also proves "
+        "more emotionally accessible than his coolly cerebral "
+        "thrillers and Batman movies."
+    ],
+    [
+        "Peter Travers, Rolling Stone",
+        "James Dyer, Empire",
+        "Scott Foundas, Variety"
+    ])
+```
+
 ### License
 The content of this repository is licensed under [MIT](https://choosealicense.com/licenses/mit/).
 
