@@ -8,6 +8,7 @@ The user can view movie trailers and look for additional information on the webs
 2. [Screenshots](#screenshots) 
 3. [Description](#description)
 5. [License](#license)
+6. [Reference](#reference)
 
 ### Installation
 The source code for this project is written in [Python](https://www.python.org/downloads/) programming language. It works well in both version 3.6.1 as well as 2.7.13.
@@ -128,6 +129,11 @@ interstellar = media.Movie(
     ])
 ```
 `my_movies.open_movies_page(movies)` does the trick of creating a new fresh_tomatoes.html file(if it doesn't already exist) and open it in a web browser.
+
+### Reference
+1. [Python Documentation](https://docs.python.org/3/)
+2. [Google Python Style Guide](#https://google.github.io/styleguide/pyguide.html)
+3. [PEP8](https://www.python.org/dev/peps/pep-0008/)
 
 ### License
 The content of this repository is licensed under [MIT](https://choosealicense.com/licenses/mit/).
