@@ -5,7 +5,7 @@ The user can view movie trailers and look for additional information on the webs
 
 ## Table of Contents
 1. [Installation](.#installation)
-2. [Screenshots](.#screenshots) 
+2. [Screenshots](#screenshots) 
 3. Description
 5. Copyright
 
