@@ -4,10 +4,10 @@ This website was done as the first of 6 projects from the [Udacity Full Stack Na
 The user can view movie trailers and look for additional information on the website.
 
 ## Table of Contents
-1. [Installation](.#installation)
+1. [Installation](#installation)
 2. [Screenshots](#screenshots) 
-3. Description
-5. Copyright
+3. [Description](#description)
+5. [License](#license)
 
 ### Installation
 The source code for this project is written in [Python 3.6.1](https://www.python.org/downloads/) programming language. 
@@ -30,15 +30,15 @@ pylint fileName.py
 ![](https://github.com/MANOJPATRA1991/fresh_tomatoes/blob/master/Screenshots/Screenshot%20(10).png?raw=true)
 
 ### Description
-Inside the **`fresh_tomatoes`** directory, we have a **`movies`** folder which contains **`entertainment_center.py`**, **`media.py`** and **`my_movies.py`** files.
+Inside the **fresh_tomatoes** directory, we have a **movies** folder which contains **entertainment_center.py**, **media.py** and **my_movies.py** files.
 
-**`my_movies.py`** writes html, css and javascript required to run the website to the **`fresh_tomatoes.html`** file.
+**my_movies.py** writes html, css and javascript required to run the website to the **fresh_tomatoes.html** file.
 
-**`media.py`** contains the Movie class with the help of which instances of type Movie can be created.
+**media.py** contains the Movie class with the help of which instances of type Movie can be created.
 
-**`entertainment_center.py`** is the file where we create Movie instances and that when executed runs the program and opens the website on a web browser.
+**entertainment_center.py** is the file where we create Movie instances and that when executed runs the program and opens the website on a web browser.
 
-To run the program, open **`entertainment_center.py`** with **IDLE(Python 3.6)** and then **Run -> Run Module** or press **F5** for instant execution.
+To run the program, open **entertainment_center.py** with **IDLE(Python 3.6)** and then **Run -> Run Module** or press **F5** for instant execution.
 
 ### License
 The content of this repository is licensed under [MIT](https://choosealicense.com/licenses/mit/).
