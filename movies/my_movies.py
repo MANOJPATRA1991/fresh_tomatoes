@@ -194,7 +194,7 @@ MAIN_PAGE_HEAD = """
                                                 '<div class="rate"><h2>Genre </h2><p><span>' + genre + '</span></p></div><hr/>' +
                                                 '<div><h2>Cast </h2><p> '));
             $.each(cast, function(i, val){
-                $("#movie-detail").append($('<span>' + val + ' |</span>'));
+                $("#movie-detail").append($('<span>' + val + ' </span>'));
             });
             $("#movie-detail").append($('</p></div><hr/><div class="rate"><h2>Director </h2><p><span> ' + director + '</span></p></div>'));
             $("#movie-reviews").empty().append($('<hr/><h2> Reviews </h2><div id="movie-rev">'));
